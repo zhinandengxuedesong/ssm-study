@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 命名空间：映射 com.zc.ssm.mapper 包下接口类 UserMapper.java -->
+<mapper namespace="com.zc.ssm.mapper.UserMapper">
+    <!-- resultMap 返回结果，结果类型：map集合，数据类型：封装的实体类 User.java -->
+    <resultMap id="map" type="User">
+        <!--
+            property: 对应实体类 User.java 中的属性；
+        -->
+        <id column="id" property="id"/>
+        <result column="user_name" property="username"/>
+        <result column="password" property="password"/>
+    </resultMap>
+    <!--
+        select 标签下是查询数据库表的 SQL 语句
+        id: 映射接口类 UserMapper.java 中的方法；
+        parameterType：SQL 语句中参数类型；
+        resultMap：返回的 SQL 查询结果存储类型。
+     -->
+    <select id="findUserById" parameterType="int" resultMap="map">
+      select * from user where id=#{id}
+    </select>
+
+    <select id="selAll" resultType="User">
+      select * from user
+    </select>
+</mapper>
